@@ -17,7 +17,6 @@ type gameRound struct {
 }
 
 func GamePlay(conn net.Conn, isHost bool, GAMEID string) {
-	fmt.Println(banner.Rpc)
 	fmt.Printf("\n--- Game Connected (%s) ---\n", GAMEID)
 
 	scanner := bufio.NewScanner(os.Stdin)
@@ -76,14 +75,15 @@ func GamePlay(conn net.Conn, isHost bool, GAMEID string) {
 
 		utils.ClearScreen()
 
-		switch result {
+		fmt.Println(utils.GetRpcArt(input, opponentMove, banner.Rpc, banner.RpcMirror))
 
+		switch result {
 		case "draw":
-			fmt.Println("Result: It's a draw!")
+			fmt.Println(utils.GetAsciiArt("DRAW!"))
 		case "user1":
-			fmt.Println("Result: You win this round!")
+			fmt.Println(utils.GetAsciiArt("YOU WIN!"))
 		case "user2":
-			fmt.Println("Result: Opponent wins this round!")
+			fmt.Println(utils.GetAsciiArt("YOU LOSE!"))
 		}
 		fmt.Println()
 	}
